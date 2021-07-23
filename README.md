@@ -8,3 +8,7 @@ Task structure
   4. Save modified file to workitem as new file with prefix "updated_"
   5. Remove workitem file "data.csv" and recreate it with new data
   
+Libraries in use
+
+  - RPA.Robocloud.Item
+  - RPA.Tables
