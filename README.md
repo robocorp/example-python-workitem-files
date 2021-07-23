@@ -10,5 +10,5 @@ Task structure
   
 Libraries in use
 
-  - RPA.Robocloud.Item
-  - RPA.Tables
+  - [RPA.Robocloud.Items](https://robocorp.com/docs/libraries/rpa-framework/rpa-robocloud-items)
+  - [RPA.Tables](https://robocorp.com/docs/libraries/rpa-framework/rpa-tables)
