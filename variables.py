@@ -1,6 +1,6 @@
 from RPA.Tables import Tables
-from RPA.Robocloud.Items import Items
+from RPA.Robocorp.WorkItems import WorkItems
 
 tables = Tables()
-items = Items()
+items = WorkItems()
 workitem_filename = "data.csv"
