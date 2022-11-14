@@ -1,16 +1,19 @@
 from variables import *
+from pathlib import Path
+import shutil
 
 
 def save_file_into_work_item(local_filepath, as_child=False):
     if as_child:
         current_item = items.get_current_work_item()
-        items.create_output_work_item(files=[local_filepath],save=True)
+        items.create_output_work_item(files=[local_filepath], save=True)
         items.set_current_work_item(current_item)
     else:
         new_workitem_filename = f"updated_{workitem_filename}"
-        items.add_work_item_file(local_filepath, name=new_workitem_filename)
+        new_file = shutil.copy(local_filepath, Path(local_filepath).with_name(new_workitem_filename))
+        items.add_work_item_file(new_file, name=new_workitem_filename)
         items.save_work_item()
-        print_file_contents(items.get_work_item_file(workitem_filename,'temp.csv'))
+        print_file_contents(items.get_work_item_file(workitem_filename, TEMP_DIR / 'temp.csv'))
         print_file_contents(items.get_work_item_file(new_workitem_filename))
 
 
@@ -27,10 +30,8 @@ def print_file_contents(filepath):
 
 def minimal_task():
     items.get_input_work_item()
-    # POSSIBLE BUG: if you don't give it a new name, when you save the work item
-    #  even if you only make changes to the local version of data.csv
-    #  it will update the work item version of data.csv
-    local_data_filepath = items.get_work_item_file(workitem_filename,'local_data.csv')
+    TEMP_DIR.mkdir(exist_ok=True)
+    local_data_filepath = items.get_work_item_file(workitem_filename, TEMP_DIR / 'data.csv')
     print_file_contents(local_data_filepath)
     add_new_data_row_to_csv_file(local_data_filepath, [4, "ship"])
     print_file_contents(local_data_filepath)
